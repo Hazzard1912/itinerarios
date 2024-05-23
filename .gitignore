@@ -1,0 +1,47 @@
+# Ignore target directory
+/target/
+/itinerarios/target/
+
+# Ignore project-specific IDE files
+.idea/
+.vscode/
+.metals/
+/itinerarios/.idea/
+/itinerarios/.vscode/
+/itinerarios/.metals/
+
+# Ignore compiled bytecode
+*.class
+/itinerarios/*.class
+
+# Ignore generated documentation
+/docs/
+/itinerarios/docs/
+
+# Ignore log files
+*.log
+/itinerarios/*.log
+
+# Ignore build artifacts
+/build/
+/itinerarios/build/
+
+# Ignore dependency directories
+/lib_managed/
+/ivy2/
+/itinerarios/lib_managed/
+/itinerarios/ivy2/
+
+# Ignore generated files
+/generated/
+/itinerarios/generated/
+
+# Ignore editor backup files
+*~
+/itinerarios/*~
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+/itinerarios/.DS_Store
+/itinerarios/Thumbs.db
