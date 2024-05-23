@@ -8,16 +8,7 @@ package object Itinerarios {
       * @return una funcion que recibe dos strings (codigos de aeropuertos) y devuelve una lista de itinerarios entre esos dos aeropuertos
       */
     def itinerarios(vuelos: List[Vuelo], aeropuertos: List[Aeropuerto]): (String, String) => List[Itinerario] = {
-        // vuelos.groupBy(_.origen).flatMap {
-        //     case (origen, vuelosDesdeOrigen) =>
-        //         vuelosDesdeOrigen.groupBy(_.destino).flatMap {
-        //             case (destino, vuelosDesdeOrigenHastaDestino) =>
-        //                 vuelosDesdeOrigenHastaDestino.groupBy(_.fecha).map {
-        //                     case (fecha, vuelosDesdeOrigenHastaDestinoEnFecha) =>
-        //                         Itinerario(origen, destino, fecha, vuelosDesdeOrigenHastaDestinoEnFecha)
-        //                 }
-        //         }
-        // }.toList
+        
     }
 
     /**
