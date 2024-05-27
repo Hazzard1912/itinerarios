@@ -74,7 +74,7 @@ package object Datos {
   // pero llega más temprano
 
   // Datos de aeropuertos en USA
-  val aeropuertos=List(
+  val aeropuertos: Seq[Aeropuerto] =List(
     Aeropuerto("ABQ", 195, 275, -800),
     Aeropuerto("ATL", 470, 280, -600),
     Aeropuerto("BNA", 430, 240, -700),
