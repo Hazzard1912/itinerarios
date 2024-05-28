@@ -2,7 +2,7 @@ import Datos._
 
 package object Itinerarios {
 
-    def buscarItinerarios(vuelos: List[Vuelo], origen: String, destino: String, visitados: Set[String]): List[List[Vuelo]] = {
+    def buscarItinerarios(vuelos: List[Vuelo], origen: String, destino: String, visitados: Set[String]): List[Itinerario] = {
       if (origen == destino) List(List())
       else {
         for {

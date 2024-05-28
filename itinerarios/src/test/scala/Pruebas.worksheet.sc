@@ -1,80 +1,93 @@
 import Datos._
 import Itinerarios._
 
+import org.scalameter._
+
+def tiempoDe[T](body: => T) = {
+  val timeA1 = config(
+    KeyValue(Key.exec.minWarmupRuns -> 20),
+    KeyValue(Key.exec.maxWarmupRuns -> 60),
+    KeyValue(Key.verbose -> false)
+  ) withWarmer(new Warmer.Default) measure (body)
+  timeA1
+}
+
 // Ejemplo curso pequeño
-val itsCurso = itinerarios(vuelosCurso,aeropuertosCurso)
+val itsCurso = itinerarios(vuelosD1,aeropuertosCurso)
 //2.1 Aeropuertos incomunicados
-val its1 = itsCurso("MID", "SVCS")
-val its2 = itsCurso("CLO", "SVCS")
+val its1 = itsCurso("PHX", "DFW")
+// val its2 = itsCurso("CLO", "SVCS")
 
-// 4 itinerarios CLO-SVO
+// // 4 itinerarios CLO-SVO
 
-val its3 = itsCurso("CLO","SVO")
+// val its3 = itsCurso("CLO","SVO")
 
-//2 itinerarios CLO-MEX
+// //2 itinerarios CLO-MEX
 
-val its4 = itsCurso("CLO", "MEX")
+// val its4 = itsCurso("CLO", "MEX")
 
-//2 itinerarios CTG-PTY
-val its5 = itsCurso("CTG","PTY")
+// //2 itinerarios CTG-PTY
+// val its5 = itsCurso("CTG","PTY")
 
-val itsTiempoCurso = itinerariosTiempo(vuelosCurso,aeropuertosCurso)
+tiempoDe(itsCurso("PHX","DFW"))
 
-// prueba itinerariosTiempo
-val itst1 = itsTiempoCurso("MID", "SVCS")
-val itst2 = itsTiempoCurso("CLO", "SVCS")
+// val itsTiempoCurso = itinerariosTiempo(vuelosCurso,aeropuertosCurso)
 
-// 4 itinerarios CLO-SVO
+// // prueba itinerariosTiempo
+// val itst1 = itsTiempoCurso("MID", "SVCS")
+// val itst2 = itsTiempoCurso("CLO", "SVCS")
 
-val itst3 = itsTiempoCurso("CLO","SVO")
+// // 4 itinerarios CLO-SVO
 
-//2 itinerarios CLO-MEX
+// val itst3 = itsTiempoCurso("CLO","SVO")
 
-val itst4 = itsTiempoCurso("CLO", "MEX")
+// //2 itinerarios CLO-MEX
 
-//2 itinerarios CTG-PTY
-val itst5 = itsTiempoCurso("CTG","PTY")
+// val itst4 = itsTiempoCurso("CLO", "MEX")
 
-// prueba itinerariosEscalas
-val itsEscalasCurso = itinerariosEscalas(vuelosCurso,aeropuertosCurso)
+// //2 itinerarios CTG-PTY
+// val itst5 = itsTiempoCurso("CTG","PTY")
 
-val itsc1 = itsEscalasCurso("MID", "SVCS")
-val itsc2 = itsEscalasCurso("CLO", "SVCS")
+// // prueba itinerariosEscalas
+// val itsEscalasCurso = itinerariosEscalas(vuelosCurso,aeropuertosCurso)
 
-// 4 itinerarios CLO-SVO
+// val itsc1 = itsEscalasCurso("MID", "SVCS")
+// val itsc2 = itsEscalasCurso("CLO", "SVCS")
 
-val itsc3 = itsEscalasCurso("CLO","SVO")
+// // 4 itinerarios CLO-SVO
 
-//2 itinerarios CLO-MEX
+// val itsc3 = itsEscalasCurso("CLO","SVO")
 
-val itsc4 = itsEscalasCurso("CLO", "MEX")
+// //2 itinerarios CLO-MEX
 
-//2 itinerarios CTG-PTY
-val itsc5 = itsEscalasCurso("CTG","PTY")
+// val itsc4 = itsEscalasCurso("CLO", "MEX")
 
-// prueba itinerariosAire
-val itsAireCurso = itinerariosAire(vuelosCurso,aeropuertosCurso)
+// //2 itinerarios CTG-PTY
+// val itsc5 = itsEscalasCurso("CTG","PTY")
 
-val itsa1 = itsAireCurso("MID", "SVCS")
-val itsa2 = itsAireCurso("CLO", "SVCS")
+// // prueba itinerariosAire
+// val itsAireCurso = itinerariosAire(vuelosCurso,aeropuertosCurso)
 
-// 4 itinerarios CLO-SVO
+// val itsa1 = itsAireCurso("MID", "SVCS")
+// val itsa2 = itsAireCurso("CLO", "SVCS")
 
-val itsa3 = itsAireCurso("CLO","SVO")
+// // 4 itinerarios CLO-SVO
 
-//2 itinerarios CLO-MEX
+// val itsa3 = itsAireCurso("CLO","SVO")
 
-val itsa4 = itsAireCurso("CLO", "MEX")
+// //2 itinerarios CLO-MEX
 
-//2 itinerarios CTG-PTY
-val itsa5 = itsAireCurso("CTG","PTY")
+// val itsa4 = itsAireCurso("CLO", "MEX")
 
-// prueba itinerarioSalida
-val itSalidaCurso = itinerarioSalida(vuelosCurso,aeropuertosCurso)
+// //2 itinerarios CTG-PTY
+// val itsa5 = itsAireCurso("CTG","PTY")
 
-val itsal1 = itSalidaCurso("CTG","PTY",11, 40)
-val itsal2 = itSalidaCurso("CTG","PTY",11, 55)
-val itsal3 = itSalidaCurso("CTG","PTY",10,30)
+// // prueba itinerarioSalida
+// val itSalidaCurso = itinerarioSalida(vuelosCurso,aeropuertosCurso)
+
+// val itsal1 = itSalidaCurso("CTG","PTY",11, 40)
+// val itsal2 = itSalidaCurso("CTG","PTY",11, 55)
+// val itsal3 = itSalidaCurso("CTG","PTY",10,30)
 
 
 // its1.map(i=>(tiempoDeVueloIt(aeropuertosCurso)(i),tiempoEnAireIt(aeropuertosCurso)(i)))
