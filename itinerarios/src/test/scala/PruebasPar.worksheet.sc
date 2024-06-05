@@ -1,9 +1,8 @@
 import Datos._
 import ItinerariosPar._
-// import scala.util.Random
 import org.scalameter._
 
-def tiempoDe[T](body: => T) = {
+def tiempoDe[T](body: => T): Quantity[Double] = {
   val timeA1 = config(
     KeyValue(Key.exec.minWarmupRuns -> 20),
     KeyValue(Key.exec.maxWarmupRuns -> 60),
@@ -12,78 +11,56 @@ def tiempoDe[T](body: => T) = {
   timeA1
 }
 
-// val random = new Random()
+val itsCursoPar = itinerariosPar(vuelosCurso, aeropuertosCurso)
+
+// Medición de tiempos para cada caso de prueba
 
 // Ejemplo curso pequeño
-val itsCursoPar = itinerariosPar(vuelosCurso,aeropuertosCurso)
-//2.1 Aeropuertos incomunicados
-val its1 = itsCursoPar("MID", "SVCS")
-val its2 = itsCursoPar("CLO", "SVCS")
+println(s"Tiempo itsCursoPar MID-SVCS: ${tiempoDe(itsCursoPar("MID", "SVCS"))}")
+println(s"Tiempo itsCursoPar CLO-SVCS: ${tiempoDe(itsCursoPar("CLO", "SVCS"))}")
 
 // 4 itinerarios CLO-SVO
+println(s"Tiempo itsCursoPar CLO-SVO: ${tiempoDe(itsCursoPar("CLO", "SVO"))}")
 
-val its3 = itsCursoPar("CLO","SVO")
+// 2 itinerarios CLO-MEX
+println(s"Tiempo itsCursoPar CLO-MEX: ${tiempoDe(itsCursoPar("CLO", "MEX"))}")
 
-//2 itinerarios CLO-MEX
+// 2 itinerarios CTG-PTY
+println(s"Tiempo itsCursoPar CTG-PTY: ${tiempoDe(itsCursoPar("CTG", "PTY"))}")
 
-val its4 = itsCursoPar("CLO", "MEX")
+// Pruebas con datos adicionales
 
-//2 itinerarios CTG-PTY
-val its5 = itsCursoPar("CTG","PTY")
+val itsPar100C1 = itinerariosPar(vuelosC1, aeropuertos.toList)
+val itsTpoPar100C1 = itinerariosTiempoPar(vuelosC1, aeropuertos.toList)
+val itsEscPar100C1 = itinerariosEscalasPar(vuelosC1, aeropuertos.toList)
+val itsAirPar100C1 = itinerariosAirePar(vuelosC1, aeropuertos.toList)
+val itsSalPar100C1 = itinerarioSalidaPar(vuelosC1, aeropuertos.toList)
 
-// tiempoDe(itsCursoPar("CLO","SVO"))
+println(s"Tiempo itsPar100C1 ORD-TPA: ${tiempoDe(itsPar100C1("ORD", "TPA"))}")
+println(s"Tiempo itsTpoPar100C1 ORD-TPA: ${tiempoDe(itsTpoPar100C1("ORD", "TPA"))}")
+println(s"Tiempo itsEscPar100C1 ORD-TPA: ${tiempoDe(itsEscPar100C1("ORD", "TPA"))}")
+println(s"Tiempo itsAirPar100C1 ORD-TPA: ${tiempoDe(itsAirPar100C1("ORD", "TPA"))}")
+println(s"Tiempo itsSalPar100C1 ORD-TPA: ${tiempoDe(itsSalPar100C1("ORD", "TPA", 18, 30))}")
 
-val itsPar15A1 = itinerariosPar(vuelosA1,aeropuertos.toList)
-val itsTpoPar15A1 = itinerariosTiempoPar(vuelosA1,aeropuertos.toList)
-val itsEscPar15A1 = itinerariosEscalasPar(vuelosA1,aeropuertos.toList)
-val itsAirPar15A1 = itinerariosAirePar(vuelosA1,aeropuertos.toList)
-val itsSalPar15A1 = itinerarioSalidaPar(vuelosA1,aeropuertos.toList)
-itsPar15A1("HOU","BNA")
-itsTpoPar15A1("HOU","BNA")
-itsEscPar15A1("HOU","BNA")
-itsAirPar15A1("HOU","BNA")
-itsSalPar15A1("HOU","BNA", 18, 30)
+val itsPar200C = itinerariosPar(vuelosC1 ++ vuelosC2, aeropuertos.toList)
+val itsTpoPar200C = itinerariosTiempoPar(vuelosC1 ++ vuelosC2, aeropuertos.toList)
+val itsEscPar200C = itinerariosEscalasPar(vuelosC1 ++ vuelosC2, aeropuertos.toList)
+val itsAirPar200C = itinerariosAirePar(vuelosC1 ++ vuelosC2, aeropuertos.toList)
+val itsSalPar200C = itinerarioSalidaPar(vuelosC1 ++ vuelosC2, aeropuertos.toList)
 
-val itsPar40B1 = itinerariosPar(vuelosB1,aeropuertos.toList)
-val itsTpoPar40B1 = itinerariosTiempoPar(vuelosB1,aeropuertos.toList)
-val itsEscPar40B1 = itinerariosEscalasPar(vuelosB1,aeropuertos.toList)
-val itsAirPar40B1 = itinerariosAirePar(vuelosB1,aeropuertos.toList)
-val itsSalPar40B1 = itinerarioSalidaPar(vuelosB1,aeropuertos.toList)
-itsPar40B1("DFW","ORD")
-itsTpoPar40B1("DFW","ORD")
-itsEscPar40B1("DFW","ORD")
-itsAirPar40B1("DFW","ORD")
-itsSalPar40B1("DFW","ORD", 18, 30)
+println(s"Tiempo itsPar200C ORD-TPA: ${tiempoDe(itsPar200C("ORD", "TPA"))}")
+println(s"Tiempo itsTpoPar200C ORD-TPA: ${tiempoDe(itsTpoPar200C("ORD", "TPA"))}")
+println(s"Tiempo itsEscPar200C ORD-TPA: ${tiempoDe(itsEscPar200C("ORD", "TPA"))}")
+println(s"Tiempo itsAirPar200C ORD-TPA: ${tiempoDe(itsAirPar200C("ORD", "TPA"))}")
+println(s"Tiempo itsSalPar200C ORD-TPA: ${tiempoDe(itsSalPar200C("ORD", "TPA", 18, 30))}")
 
-val itsPar100C1 = itinerariosPar(vuelosC1,aeropuertos.toList)
-val itsTpoPar100C1 = itinerariosTiempoPar(vuelosC1,aeropuertos.toList)
-val itsEscPar100C1 = itinerariosEscalasPar(vuelosC1,aeropuertos.toList)
-val itsAirPar100C1 = itinerariosAirePar(vuelosC1,aeropuertos.toList)
-val itsSalPar100C1 = itinerarioSalidaPar(vuelosC1,aeropuertos.toList)
-itsPar100C1("ORD","TPA")
-itsTpoPar100C1("ORD","TPA")
-itsEscPar100C1("ORD","TPA")
-itsAirPar100C1("ORD","TPA")
-itsSalPar100C1("ORD","TPA", 18, 30)
-
-val itsPar200C = itinerariosPar(vuelosC1++vuelosC2, aeropuertos.toList)
-val itsTpoPar200C = itinerariosTiempoPar(vuelosC1++vuelosC2, aeropuertos.toList)
-val itsEscPar200C = itinerariosEscalasPar(vuelosC1++vuelosC2, aeropuertos.toList)
-val itsAirPar200C = itinerariosAirePar(vuelosC1++vuelosC2, aeropuertos.toList)
-val itsSalPar200C = itinerarioSalidaPar(vuelosC1++vuelosC2, aeropuertos.toList)
-itsPar200C("ORD","TPA")
-itsTpoPar200C("ORD","TPA")
-itsEscPar200C("ORD","TPA")
-itsAirPar200C("ORD","TPA")
-itsSalPar200C("ORD","TPA", 18, 30)
 /*
-val its300CPar = itinerariosPar((vuelosC1++vuelosC2++vuelosC3), aeropuertos.toList)
-its300CPar("ORD","TPA")
+// Casos adicionales comentados
+val its300CPar = itinerariosPar((vuelosC1 ++ vuelosC2 ++ vuelosC3), aeropuertos.toList)
+println(s"Tiempo its300CPar ORD-TPA: ${tiempoDe(its300CPar("ORD", "TPA"))}")
 
-val its400CPar = itinerariosPar((vuelosC1++vuelosC2++vuelosC3++vuelosC4), aeropuertos.toList)
-its400CPar("ORD","TPA")
+val its400CPar = itinerariosPar((vuelosC1 ++ vuelosC2 ++ vuelosC3 ++ vuelosC4), aeropuertos.toList)
+println(s"Tiempo its400CPar ORD-TPA: ${tiempoDe(its400CPar("ORD", "TPA"))}")
 
-val its500CPar = itinerariosPar((vuelosC1++vuelosC2++vuelosC3++vuelosC4++vuelosC5), aeropuertos.toList)
-its500CPar("ORD","TPA")
-
- */
+val its500CPar = itinerariosPar((vuelosC1 ++ vuelosC2 ++ vuelosC3 ++ vuelosC4 ++ vuelosC5), aeropuertos.toList)
+println(s"Tiempo its500CPar ORD-TPA: ${tiempoDe(its300CPar("ORD", "TPA"))}")
