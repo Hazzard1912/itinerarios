@@ -1,3 +1,11 @@
+/**
+ * Proyecto: El problema de la Planificacion de vuelos
+ * ItineraiosPar/package.scala
+ * Juan Esteban Guerrero Camacho (202040798)
+ * Oscar David Cuaical Lopez (202270657)
+ * Juan Sebastian Tobar Moriones (202040194)
+ * Jhonnier Albeiro Hernández Brito (202140113)
+ */
 import Datos._
 import common._
 import Itinerarios._
